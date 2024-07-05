@@ -33,12 +33,13 @@ func main() {
 				validInput = true
 			}
 		}
-		if mapGrid[x-1][y-1] != 9 {
-			mapGrid[x-1][y-1] += 10
-		} else {
+		if mapGrid[x-1][y-1] == 9 {
 			mapGrid[x-1][y-1] += 10
 			gameisover = true
+		} else if mapGrid[x-1][y-1] < 9 {
+			mapGrid[x-1][y-1] += 10
 		}
+		clearScreen()
 		printMap(mapGrid)
 	}
 	fmt.Print("GAME OVER")
