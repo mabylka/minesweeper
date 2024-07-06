@@ -20,25 +20,8 @@ func main() {
 	optionshandler()
 	mapGeneration()
 	printMap(mapGrid)
-	var x, y int
 	for !gameisover {
-		validInput := false
-		for !validInput {
-			fmt.Println("Enter your coordinates:")
-			_, err := fmt.Scanf("%d %d", &x, &y)
-			if err != nil {
-				fmt.Println("Invalid Input")
-			}
-			if x > 0 && x <= mapHeight && y > 0 && y <= mapWidth {
-				validInput = true
-			}
-		}
-		if mapGrid[x-1][y-1] == 9 {
-			mapGrid[x-1][y-1] += 10
-			gameisover = true
-		} else if mapGrid[x-1][y-1] < 9 {
-			mapGrid[x-1][y-1] += 10
-		}
+		parseInput()
 		clearScreen()
 		printMap(mapGrid)
 	}

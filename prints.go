@@ -9,9 +9,22 @@ import (
 
 func printMap(grid [][]int) {
 	printTop()
+	verticalCoordinate := 1
 	for i := 0; i < len(grid); i++ {
 		for k := 0; k < cellHeight; k++ {
+			if k == cellHeight/2 {
+				if verticalCoordinate < 10 {
+					fmt.Printf("%d ", verticalCoordinate)
+				} else {
+					fmt.Printf("%d", verticalCoordinate)
+
+				}
+				verticalCoordinate++
+			} else {
+				fmt.Print("  ")
+			}
 			for j := 0; j < len(grid[i]); j++ {
+
 				fmt.Print("|")
 				if grid[i][j] < 10 {
 					if gameisover && grid[i][j] == 9 {
@@ -58,6 +71,7 @@ func filOpenedCell(k, count int) {
 func printTop() {
 	fmt.Println()
 	horizontalCoordinate := 1
+	fmt.Print("  ")
 	for i := 0; i < mapWidth*(cellWidth+1); i++ {
 		if horizontalCoordinate < 10 {
 			if i%(cellWidth+1) == 4 {
@@ -80,7 +94,7 @@ func printTop() {
 	}
 
 	fmt.Println()
-	fmt.Print(" ")
+	fmt.Print("   ")
 	for i := 0; i < cellWidth*mapWidth+mapWidth-1; i++ {
 		fmt.Print("_")
 	}
