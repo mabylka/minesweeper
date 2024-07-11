@@ -7,6 +7,14 @@ import (
 	"runtime"
 )
 
+const (
+	BLUE       = "\033[1;34m%d\033[0m"
+	BRIGHTBLUE = "\033[1;36m%d\033[0m"
+	YELLOW     = "\033[1;33m%s\033[0m"
+	RED        = "\033[1;31m%d\033[0m"
+	GREEN      = "\033[0;32m%d\033[0m"
+)
+
 func printMap(grid [][]int) {
 	printTop()
 	verticalCoordinate := 1
@@ -54,11 +62,17 @@ func filOpenedCell(k, count int) {
 		if k == cellHeight/2 && count != 0 && i == cellWidth/2 {
 			switch count {
 			case 9:
-				fmt.Print("*")
+				fmt.Printf(YELLOW, "*")
 			case 0:
 				fmt.Print(" ")
+			case 1:
+				fmt.Printf(GREEN, count)
+			case 2:
+				fmt.Printf(BRIGHTBLUE, count)
+			case 3:
+				fmt.Printf(BLUE, count)
 			default:
-				fmt.Print(count)
+				fmt.Printf(RED, count)
 			}
 		} else if k == cellHeight-1 {
 			fmt.Print("_")

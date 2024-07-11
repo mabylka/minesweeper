@@ -12,8 +12,10 @@ var (
 	mapWidth   int
 	level      int
 	bombs      int
+	moves      int
 	mapGrid    [][]int
 	gameisover bool
+	gameWin    bool
 	firstdone  bool
 )
 
@@ -33,5 +35,11 @@ func main() {
 		clearScreen()
 		printMap(mapGrid)
 	}
-	fmt.Print("GAME OVER")
+	if gameWin {
+		fmt.Println("YOUWON")
+	} else {
+		fmt.Println("GAME OVER")
+	}
+
+	fmt.Printf("Moves: %d", moves)
 }

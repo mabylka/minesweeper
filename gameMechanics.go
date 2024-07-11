@@ -18,25 +18,8 @@ func mapGeneration(firstX, firstY int) {
 	for i := 0; i < mapHeight; i++ {
 		for j := 0; j < mapWidth; j++ {
 			countNeighbours(i, j)
-			fmt.Print(mapGrid[i][j])
 		}
-		fmt.Println()
 	}
-
-	// directions := [][]int{{-1, -1}, {0, -1}, {1, -1}, {-1, 0}, {-1, 1}, {1, 1}, {0, 1}, {1, 0}}
-	// for i := 0; i < mapHeight; i++ {
-	// 	for j := 0; j < mapWidth; j++ {
-	// 		for _, dir := range directions {
-	// 			newx := i + dir[0]
-	// 			newy := j + dir[1]
-	// 			if newx >= 0 && newx < mapHeight && newy >= 0 && newy < mapWidth && mapGrid[newx][newy] == 9 && mapGrid[i][j] < 9 {
-	// 				mapGrid[i][j] += 1
-	// 			}
-
-	// 		}
-	// 	}
-	// }
-
 }
 
 func parseInput() {
@@ -56,14 +39,30 @@ func parseInput() {
 	if !firstdone {
 		mapGeneration(x-1, y-1)
 		firstdone = true
+		moves = 1
 	}
 	if mapGrid[x-1][y-1] == 9 {
 		mapGrid[x-1][y-1] += 10
 		gameisover = true
 	} else if mapGrid[x-1][y-1] == 0 {
 		removeIsland(x-1, y-1)
+		moves++
 	} else if mapGrid[x-1][y-1] < 9 {
 		mapGrid[x-1][y-1] += 10
+		moves++
+	}
+	movesleft := false
+	for i := 0; i < mapHeight; i++ {
+		for j := 0; j < mapWidth; j++ {
+			if mapGrid[i][j] < 9 {
+				movesleft = true
+				break
+			}
+		}
+	}
+	if !movesleft {
+		gameisover = true
+		gameWin = true
 	}
 }
 
