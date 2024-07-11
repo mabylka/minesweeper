@@ -14,11 +14,19 @@ var (
 	bombs      int
 	mapGrid    [][]int
 	gameisover bool
+	firstdone  bool
 )
 
 func main() {
 	optionshandler()
-	mapGeneration()
+	mapGrid = make([][]int, mapHeight)
+	for i := 0; i < mapHeight; i++ {
+		mapGrid[i] = make([]int, mapWidth)
+		for j := 0; j < mapWidth; j++ {
+			mapGrid[i][j] = 0
+		}
+	}
+
 	printMap(mapGrid)
 	for !gameisover {
 		parseInput()
